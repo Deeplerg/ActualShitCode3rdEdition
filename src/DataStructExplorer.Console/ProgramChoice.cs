@@ -14,5 +14,7 @@ enum ProgramChoice
     QueueFile,
     
     LinkedListGroup,
-    LinkedListPrograms
+    LinkedListPrograms,
+    
+    Quit
 }
