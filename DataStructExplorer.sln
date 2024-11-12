@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7B554A02-828A-4F58-9893-9CFE390CD58D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructExplorer.Core", "src\DataStructExplorer.Core\DataStructExplorer.Core.csproj", "{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructExplorer.Console", "src\DataStructExplorer.Console\DataStructExplorer.Console.csproj", "{3717E71F-0ECC-4B4E-A2EF-3603925124B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB} = {7B554A02-828A-4F58-9893-9CFE390CD58D}
+		{3717E71F-0ECC-4B4E-A2EF-3603925124B7} = {7B554A02-828A-4F58-9893-9CFE390CD58D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77CE0F29-F8FA-4B97-93A2-A20BFD68AFDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3717E71F-0ECC-4B4E-A2EF-3603925124B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3717E71F-0ECC-4B4E-A2EF-3603925124B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3717E71F-0ECC-4B4E-A2EF-3603925124B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3717E71F-0ECC-4B4E-A2EF-3603925124B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
