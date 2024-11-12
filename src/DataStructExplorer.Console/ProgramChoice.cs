@@ -16,5 +16,8 @@ enum ProgramChoice
     LinkedListGroup,
     LinkedListPrograms,
     
+    TreeGroup,
+    TreeProgram,
+    
     Quit
 }

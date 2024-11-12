@@ -2,6 +2,7 @@
 using DataStructExplorer.Console.LinkedList;
 using DataStructExplorer.Console.Queue;
 using DataStructExplorer.Console.Stack;
+using DataStructExplorer.Console.Tree;
 using ExpressionCalculator;
 using Spectre.Console;
 
@@ -12,6 +13,7 @@ var calculator = ExpressionCalculatorBuilder.Default.Build();
 var stackPrograms = new StackPrograms(calculator, defaultFileName);
 var queuePrograms = new QueuePrograms(defaultFileName);
 var linkedListPrograms = new LinkedListPrograms();
+var treeProgram = new TreeProgram();
 
 var handlers = new Dictionary<ProgramChoice, Action>()
 {
@@ -25,6 +27,8 @@ var handlers = new Dictionary<ProgramChoice, Action>()
     { ProgramChoice.QueueFile, queuePrograms.HandleQueueFile },
 
     { ProgramChoice.LinkedListPrograms, linkedListPrograms.Run },
+
+    { ProgramChoice.TreeProgram, treeProgram.Run },
     
     { ProgramChoice.Quit, () => Environment.Exit(0) }
 }.AsReadOnly();
@@ -60,6 +64,9 @@ ProgramChoice PromptMainMenu()
             .AddChoiceGroup(
                 ProgramChoice.LinkedListGroup,
                 ProgramChoice.LinkedListPrograms)
+            .AddChoiceGroup(
+                ProgramChoice.TreeGroup,
+                ProgramChoice.TreeProgram)
             .AddChoices(ProgramChoice.Quit)
             .UseConverter(program =>
                 program switch
@@ -82,6 +89,9 @@ ProgramChoice PromptMainMenu()
 
                     ProgramChoice.LinkedListGroup => "Связный список",
                     ProgramChoice.LinkedListPrograms => "Программы связного списка",
+
+                    ProgramChoice.TreeGroup => "Дерево",
+                    ProgramChoice.TreeProgram => "Программа дерева",
 
                     ProgramChoice.Quit => "Выйти из программы",
                     _ => throw CreateUnknownProgramException(program)
