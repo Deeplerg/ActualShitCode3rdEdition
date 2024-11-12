@@ -3,11 +3,11 @@
 using System;
 using Spectre.Console;
 
-public class LinkedListPrograms
+public class LinkedListProgram
 {
     private Core.LinkedList _list;
 
-    public LinkedListPrograms()
+    public LinkedListProgram()
     {
         _list = new Core.LinkedList();
     }

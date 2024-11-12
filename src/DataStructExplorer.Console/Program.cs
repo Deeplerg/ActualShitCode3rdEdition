@@ -12,7 +12,7 @@ var calculator = ExpressionCalculatorBuilder.Default.Build();
 
 var stackPrograms = new StackPrograms(calculator, defaultFileName);
 var queuePrograms = new QueuePrograms(defaultFileName);
-var linkedListPrograms = new LinkedListPrograms();
+var linkedListPrograms = new LinkedListProgram();
 var treeProgram = new TreeProgram();
 
 var handlers = new Dictionary<ProgramChoice, Action>()
