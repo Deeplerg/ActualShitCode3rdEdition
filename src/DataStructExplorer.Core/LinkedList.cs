@@ -6,8 +6,8 @@ public class LinkedList
 
     public void AddLast(int data)
     {
-        LinkedListNode newLinkedListNode = new LinkedListNode(data);
-        if (Head == null)
+        var newLinkedListNode = new LinkedListNode(data);
+        if (Head is null)
         {
             Head = newLinkedListNode;
             return;
@@ -19,16 +19,5 @@ public class LinkedList
             current = current.Next;
         }
         current.Next = newLinkedListNode;
-    }
-
-    public void PrintList()
-    {
-        var current = Head;
-        while (current is not null)
-        {
-            Console.Write(current.Data + " ");
-            current = current.Next;
-        }
-        Console.WriteLine();
     }
 }
