@@ -9,7 +9,7 @@ public class LinkedQueue<T> : IEnumerable<T>
     private QueueNode<T>? _head;
     private QueueNode<T>? _tail;
     
-    public void Push(T value)
+    public void Enqueue(T value)
     {
         if (_head is null)
         {
@@ -24,7 +24,7 @@ public class LinkedQueue<T> : IEnumerable<T>
         _tail = newTail;
     }
 
-    public T Pop()
+    public T Dequeue()
     {
         ThrowIfEmpty();
 
@@ -46,26 +46,16 @@ public class LinkedQueue<T> : IEnumerable<T>
         return _head is null;
     }
 
-    public T Top()
+    /// <summary>
+    /// Returns the element at the beginning of the queue without removing it. 
+    /// </summary>
+    /// <returns>The element at the beginning of the queue.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the queue is empty.</exception>
+    public T Peek()
     {
         ThrowIfEmpty();
 
         return _head!.Value;
-    }
-
-    public void Print()
-    {
-        if (IsEmpty())
-            return;
-
-        var builder = new StringBuilder();
-        foreach (var element in this)
-        {
-            builder.Append(element);
-            builder.Append(' ');
-        }
-
-        Console.WriteLine(builder.ToString());
     }
 
     public IEnumerator<T> GetEnumerator()
