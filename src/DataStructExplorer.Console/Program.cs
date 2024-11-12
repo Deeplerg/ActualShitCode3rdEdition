@@ -1,4 +1,5 @@
 ﻿using DataStructExplorer.Console;
+using DataStructExplorer.Console.LinkedList;
 using DataStructExplorer.Console.Queue;
 using DataStructExplorer.Console.Stack;
 using ExpressionCalculator;
@@ -20,6 +21,9 @@ var choice = AnsiConsole.Prompt(
         .AddChoiceGroup(
             ProgramChoice.QueueGroup,
             ProgramChoice.QueueFile)
+        .AddChoiceGroup(
+            ProgramChoice.LinkedListGroup,
+            ProgramChoice.LinkedListPrograms)
         .UseConverter(program =>
             program switch
             {
@@ -34,14 +38,18 @@ var choice = AnsiConsole.Prompt(
                 ProgramChoice.QueueGroup => "Очередь",
                 ProgramChoice.QueueFile => "Выполнить программу из файла",
 
+                ProgramChoice.LinkedListGroup => "Связный список",
+                ProgramChoice.LinkedListPrograms => "Программы связного списка",
                 _ => throw CreateUnknownProgramException(program)
-            }));
+            })
+        .MoreChoicesText("(Прокрутите вверх и вниз, чтобы увидеть больше вариантов)"));
 
 
 var calculator = ExpressionCalculatorBuilder.Default.Build();
 
 var stackPrograms = new StackPrograms(calculator, defaultFileName);
 var queuePrograms = new QueuePrograms(defaultFileName);
+var linkedListPrograms = new LinkedListPrograms();
 
 var handlers = new Dictionary<ProgramChoice, Action>()
 {
@@ -53,6 +61,8 @@ var handlers = new Dictionary<ProgramChoice, Action>()
     { ProgramChoice.StackInfixCalculatorInteractive, stackPrograms.HandleStackInfixCalculatorInteractive },
     
     { ProgramChoice.QueueFile, queuePrograms.HandleQueueFile },
+
+    { ProgramChoice.LinkedListPrograms, linkedListPrograms.Run }
 }.AsReadOnly();
 
 if (!handlers.TryGetValue(choice, out var handler))

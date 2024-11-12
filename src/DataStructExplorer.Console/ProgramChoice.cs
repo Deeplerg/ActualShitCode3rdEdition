@@ -11,5 +11,8 @@ enum ProgramChoice
     StackInfixCalculatorInteractive,
     
     QueueGroup,
-    QueueFile
+    QueueFile,
+    
+    LinkedListGroup,
+    LinkedListPrograms
 }
