@@ -1,4 +1,5 @@
 ﻿using DataStructExplorer.Console;
+using DataStructExplorer.Console.Queue;
 using DataStructExplorer.Console.Stack;
 using ExpressionCalculator;
 using Spectre.Console;
@@ -40,6 +41,7 @@ var choice = AnsiConsole.Prompt(
 var calculator = ExpressionCalculatorBuilder.Default.Build();
 
 var stackPrograms = new StackPrograms(calculator, defaultFileName);
+var queuePrograms = new QueuePrograms(defaultFileName);
 
 var handlers = new Dictionary<ProgramChoice, Action>()
 {
@@ -50,7 +52,7 @@ var handlers = new Dictionary<ProgramChoice, Action>()
     { ProgramChoice.StackInfixToPostfixInteractive, stackPrograms.HandleStackInfixToPostfixInteractive },
     { ProgramChoice.StackInfixCalculatorInteractive, stackPrograms.HandleStackInfixCalculatorInteractive },
     
-    //    { ProgramChoice.QueueFile, HandleQueueFile },
+    { ProgramChoice.QueueFile, queuePrograms.HandleQueueFile },
 }.AsReadOnly();
 
 if (!handlers.TryGetValue(choice, out var handler))
