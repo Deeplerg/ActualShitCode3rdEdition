@@ -1,12 +1,12 @@
 ﻿namespace DataStructExplorer.Core;
 
-public class TreeNode
+public class TreeNode<T>
 {
-    public char Data;
-    public TreeNode? Left;
-    public TreeNode? Right;
+    public T Data;
+    public TreeNode<T>? Left;
+    public TreeNode<T>? Right;
 
-    public TreeNode(char data)
+    public TreeNode(T data)
     {
         Data = data;
         Left = null;

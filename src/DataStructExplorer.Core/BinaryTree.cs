@@ -1,8 +1,8 @@
 ﻿namespace DataStructExplorer.Core;
 
-public class BinaryTree
+public class BinaryTree<T>
 {
-    public TreeNode? Root;
+    public TreeNode<T>? Root;
 
     private const string NullLeafRepresentation = "*"; 
     
@@ -11,12 +11,12 @@ public class BinaryTree
         return TraverseNodeDepthFirstRecursive(Root);
     }
 
-    private string TraverseNodeDepthFirstRecursive(TreeNode? node)
+    private string TraverseNodeDepthFirstRecursive(TreeNode<T>? node)
     {
-        if (node is null)
+        if (node is null || node.Data is null)
             return NullLeafRepresentation;
 
-        string result = node.Data.ToString();
+        string result = node.Data.ToString() ?? string.Empty;
         result += TraverseNodeDepthFirstRecursive(node.Left);
         result += TraverseNodeDepthFirstRecursive(node.Right);
 
@@ -28,13 +28,13 @@ public class BinaryTree
         if (Root is null)
             return string.Empty;
 
-        var queue = new Queue<TreeNode?>();
+        var queue = new Queue<TreeNode<T>?>();
         queue.Enqueue(Root);
         string result = string.Empty;
 
         while (queue.Count > 0)
         {
-            TreeNode? current = queue.Dequeue();
+            var current = queue.Dequeue();
 
             if (current is null)
             {

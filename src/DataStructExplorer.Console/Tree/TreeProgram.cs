@@ -7,10 +7,10 @@ using System;
 
 public class TreeProgram
 {
-    private readonly BinaryTree _tree = new();
-    private readonly Stack<TreeNode> _navigationStack = new();
+    private readonly BinaryTree<char> _tree = new();
+    private readonly Stack<TreeNode<char>> _navigationStack = new();
     
-    private TreeNode? _currentNode;
+    private TreeNode<char>? _currentNode;
 
     public void Run()
     {
@@ -61,17 +61,17 @@ public class TreeProgram
 
     private void CreateSampleTree()
     {
-        _tree.Root = new TreeNode('A');
+        _tree.Root = new TreeNode<char>('A');
         var root = _tree.Root;
         
-        root.Left = new TreeNode('B');
-        root.Left.Left = new TreeNode('D');
-        root.Left.Left.Right = new TreeNode('G');
-        root.Right = new TreeNode('C');
-        root.Right.Left = new TreeNode('E');
-        root.Right.Right = new TreeNode('F');
-        root.Right.Right.Left = new TreeNode('H');
-        root.Right.Right.Right = new TreeNode('J');
+        root.Left = new TreeNode<char>('B');
+        root.Left.Left = new TreeNode<char>('D');
+        root.Left.Left.Right = new TreeNode<char>('G');
+        root.Right = new TreeNode<char>('C');
+        root.Right.Left = new TreeNode<char>('E');
+        root.Right.Right = new TreeNode<char>('F');
+        root.Right.Right.Left = new TreeNode<char>('H');
+        root.Right.Right.Right = new TreeNode<char>('J');
         
         _currentNode = _tree.Root;
         _navigationStack.Clear();
@@ -90,7 +90,7 @@ public class TreeProgram
         char name = AnsiConsole.Prompt(new TextPrompt<char>("[cyan]Введите название нового корневого узла:[/]"));
         
         _navigationStack.Clear();
-        _tree.Root = new TreeNode(name);
+        _tree.Root = new TreeNode<char>(name);
         _currentNode = _tree.Root;
         
         AnsiConsole.MarkupLine("[green]Создан новый корневой узел.[/]");
@@ -128,7 +128,7 @@ public class TreeProgram
             return;
         }
         char data = AnsiConsole.Prompt(new TextPrompt<char>("[cyan]Введите значение нового левого дочернего узла:[/]"));
-        _currentNode.Left = new TreeNode(data);
+        _currentNode.Left = new TreeNode<char>(data);
         AnsiConsole.MarkupLine($"[green]Левый дочерний узел '{data}' добавлен.[/]");
     }
 
@@ -140,7 +140,7 @@ public class TreeProgram
             return;
         }
         char data = AnsiConsole.Prompt(new TextPrompt<char>("[cyan]Введите значение нового правого дочернего узла:[/]"));
-        _currentNode.Right = new TreeNode(data);
+        _currentNode.Right = new TreeNode<char>(data);
         AnsiConsole.MarkupLine($"[green]Правый дочерний узел '{data}' добавлен.[/]");
     }
 
@@ -152,7 +152,7 @@ public class TreeProgram
             return;
         }
 
-        TreeNode parent = _navigationStack.Peek();
+        var parent = _navigationStack.Peek();
         if (parent.Left == _currentNode)
             parent.Left = null;
         else if (parent.Right == _currentNode)
