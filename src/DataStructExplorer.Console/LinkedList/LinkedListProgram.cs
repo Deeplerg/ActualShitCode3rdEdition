@@ -2,21 +2,17 @@
 
 using System;
 using Spectre.Console;
+using Core;
 
 public class LinkedListProgram
 {
-    private Core.LinkedList _list;
-
-    public LinkedListProgram()
-    {
-        _list = new Core.LinkedList();
-    }
+    private LinkedList _list = new();
 
     public void Run()
     {
         while (true)
         {
-            AnsiConsole.Write(new Markup("[cyan]Выберите операцию для связанного списка:[/]\n"));
+            AnsiConsole.Markup("[cyan]Выберите операцию для связанного списка:[/]\n");
             AnsiConsole.WriteLine("1. Перевернуть список");
             AnsiConsole.WriteLine("2. Переместить последний элемент в начало");
             AnsiConsole.WriteLine("3. Посчитать уникальные элементы");
@@ -31,7 +27,10 @@ public class LinkedListProgram
             AnsiConsole.WriteLine("12. Поменять местами два элемента по значению");
             AnsiConsole.WriteLine("0. Выход");
 
-            int choice = AnsiConsole.Prompt(new TextPrompt<int>("[cyan]Введите ваш выбор:[/]").Validate(c => c >= 0 && c <= 12));
+            int choice = AnsiConsole
+                .Prompt(
+                    new TextPrompt<int>("[cyan]Введите ваш выбор:[/]")
+                        .Validate(c => c is >= 0 and <= 12));
 
             if (choice == 0)
                 break;
@@ -148,9 +147,9 @@ public class LinkedListProgram
         AnsiConsole.MarkupLine($"[green]Элементы {value1} и {value2} поменялись местами, если они существуют.[/]");
     }
     
-    private Core.LinkedList CreateLinkedList(string prompt)
+    private LinkedList CreateLinkedList(string prompt)
     {
-        var list = new Core.LinkedList();
+        var list = new LinkedList();
         string input = AnsiConsole.Prompt(new TextPrompt<string>($"[cyan]Введите {prompt}, разделенные пробелами:[/]"));
         foreach (var element in input.Split(' '))
         {
@@ -160,10 +159,10 @@ public class LinkedListProgram
         return list;
     }
 
-    private void DisplayList(Core.LinkedList list)
+    private void DisplayList(LinkedList list)
     {
         var current = list.Head;
-        while (current != null)
+        while (current is not null)
         {
             AnsiConsole.Markup($"[yellow]{current.Data}[/] -> ");
             current = current.Next;

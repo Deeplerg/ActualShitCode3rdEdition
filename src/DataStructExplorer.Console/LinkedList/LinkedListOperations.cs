@@ -4,7 +4,7 @@ using Core;
 
 public class LinkedListOperations
 {
-    // 1. Reverse the list
+    // 1
     public static void Reverse(LinkedList list)
     {
         LinkedListNode? prev = null, current = list.Head, next;
@@ -18,7 +18,7 @@ public class LinkedListOperations
         list.Head = prev;
     }
 
-    // 2. Move last element to start (or first to end)
+    // 2
     public static void MoveLastToStart(LinkedList list)
     {
         if (list.Head is null || list.Head.Next is null) return;
@@ -38,23 +38,7 @@ public class LinkedListOperations
         }
     }
 
-    public static void MoveFirstToEnd(LinkedList list)
-    {
-        if (list.Head is null || list.Head.Next is null) return;
-
-        var firstLinkedListNode = list.Head;
-        list.Head = firstLinkedListNode.Next;
-        firstLinkedListNode.Next = null;
-
-        var current = list.Head;
-        while (current.Next is not null)
-        {
-            current = current.Next;
-        }
-        current.Next = firstLinkedListNode;
-    }
-
-    // 3. Count unique elements
+    // 3
     public static int CountUniqueElements(LinkedList list)
     {
         var seen = new HashSet<int>();
@@ -67,7 +51,7 @@ public class LinkedListOperations
         return seen.Count;
     }
 
-    // 4. Remove non-unique elements
+    // 4
     public static void RemoveNonUniqueElements(LinkedList list)
     {
         var elementCount = new Dictionary<int, int>();
@@ -75,10 +59,8 @@ public class LinkedListOperations
 
         while (current is not null)
         {
-            if (elementCount.ContainsKey(current.Data))
+            if (!elementCount.TryAdd(current.Data, 1))
                 elementCount[current.Data]++;
-            else
-                elementCount[current.Data] = 1;
 
             current = current.Next;
         }
@@ -102,7 +84,7 @@ public class LinkedListOperations
         }
     }
 
-    // 5. Insert list L after first occurrence of x
+    // 5
     public static void InsertListAfterFirstX(LinkedList list, LinkedList toInsert, int x)
     {
         var current = list.Head;
@@ -126,10 +108,10 @@ public class LinkedListOperations
             insertEnd.Next = temp;
     }
 
-    // 6. Insert element E in sorted order
+    // 6
     public static void InsertInSortedOrder(LinkedList list, int e)
     {
-        LinkedListNode newLinkedListNode = new LinkedListNode(e);
+        var newLinkedListNode = new LinkedListNode(e);
 
         if (list.Head is null || list.Head.Data >= e)
         {
@@ -138,7 +120,7 @@ public class LinkedListOperations
             return;
         }
 
-        LinkedListNode current = list.Head;
+        var current = list.Head;
         while (current.Next is not null && current.Next.Data < e)
         {
             current = current.Next;
@@ -148,7 +130,7 @@ public class LinkedListOperations
         current.Next = newLinkedListNode;
     }
 
-    // 7. Remove all elements with value E
+    // 7
     public static void RemoveAllElements(LinkedList list, int e)
     {
         while (list.Head is not null && list.Head.Data == e)
@@ -166,20 +148,20 @@ public class LinkedListOperations
         }
     }
 
-    // 8. Insert F before the first occurrence of E
+    // 8
     public static void InsertBeforeFirstE(LinkedList list, int e, int f)
     {
         if (list.Head is null) return;
 
         if (list.Head.Data == e)
         {
-            LinkedListNode newLinkedListNode = new LinkedListNode(f);
+            var newLinkedListNode = new LinkedListNode(f);
             newLinkedListNode.Next = list.Head;
             list.Head = newLinkedListNode;
             return;
         }
 
-        LinkedListNode current = list.Head;
+        var current = list.Head;
         while (current.Next is not null && current.Next.Data != e)
         {
             current = current.Next;
@@ -187,13 +169,13 @@ public class LinkedListOperations
 
         if (current.Next is not null)
         {
-            LinkedListNode newLinkedListNode = new LinkedListNode(f);
+            var newLinkedListNode = new LinkedListNode(f);
             newLinkedListNode.Next = current.Next;
             current.Next = newLinkedListNode;
         }
     }
 
-    // 9. Append list E to list L
+    // 9
     public static void AppendList(LinkedList list, LinkedList toAppend)
     {
         if (list.Head is null)
@@ -202,7 +184,7 @@ public class LinkedListOperations
             return;
         }
 
-        LinkedListNode current = list.Head;
+        var current = list.Head;
         while (current.Next is not null)
         {
             current = current.Next;
@@ -210,7 +192,7 @@ public class LinkedListOperations
         current.Next = toAppend.Head;
     }
 
-    // 10. Split list by first occurrence of x
+    // 10
     public static (LinkedList, LinkedList) SplitByFirstX(LinkedList list, int x)
     {
         var beforeX = new LinkedList();
@@ -249,30 +231,22 @@ public class LinkedListOperations
         return (beforeX, afterX);
     }
 
-    // 11. Double the list
+    // 11
     public static void DoubleList(LinkedList list)
     {
         if (list.Head is null) return;
 
-        LinkedListNode current = list.Head;
+        var current = list.Head;
         while (current.Next is not null)
         {
             current = current.Next;
         }
 
-        LinkedListNode newHead = list.Head;
+        var newHead = list.Head;
         current.Next = CloneList(newHead);
     }
-
-    private static LinkedListNode? CloneList(LinkedListNode? head)
-    {
-        if (head is null) return null;
-        LinkedListNode newHead = new LinkedListNode(head.Data);
-        newHead.Next = CloneList(head.Next);
-        return newHead;
-    }
-
-    // 12. Swap two elements by value
+    
+    // 12
     public static void SwapElements(LinkedList list, int value1, int value2)
     {
         if (list.Head is null || value1 == value2) return;
@@ -304,8 +278,16 @@ public class LinkedListOperations
         else
             list.Head = node1;
 
-        LinkedListNode? temp = node1.Next;
+        var temp = node1.Next;
         node1.Next = node2.Next;
         node2.Next = temp;
+    }    
+    
+    private static LinkedListNode? CloneList(LinkedListNode? head)
+    {
+        if (head is null) return null;
+        var newHead = new LinkedListNode(head.Data);
+        newHead.Next = CloneList(head.Next);
+        return newHead;
     }
 }
