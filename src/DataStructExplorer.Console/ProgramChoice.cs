@@ -9,15 +9,19 @@ enum ProgramChoice
     StackInfixToPostfixFile,
     StackInfixToPostfixInteractive,
     StackInfixCalculatorInteractive,
+    StackPathSimplifierProgram,
     
     QueueGroup,
     QueueFile,
+    QueueTaskSchedulerProgram,
     
     LinkedListGroup,
     LinkedListPrograms,
+    LinkedListTodoProgram,
     
     TreeGroup,
     TreeProgram,
+    TreeAccessControlProgram,
     
     Quit
 }
