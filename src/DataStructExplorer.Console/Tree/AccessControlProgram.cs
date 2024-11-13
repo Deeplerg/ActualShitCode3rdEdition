@@ -14,27 +14,26 @@ public class AccessControlProgram
     {
         while (true)
         {
-            AnsiConsole.Markup("[bold green]Программа Access Control List (ACL)[/]\n");
-
-            if (_currentNode is null)
-                AnsiConsole.Markup("[bold red]Роль не выбрана.[/]\n");
-            else
-                AnsiConsole.Markup($"[bold yellow]Текущая роль:[/] {_currentNode.Role}\n");
-            
-            AnsiConsole.MarkupLine("\n[cyan]Выберите действие:[/]");
-            AnsiConsole.WriteLine("1. Создать корневую роль");
-            AnsiConsole.WriteLine("2. Добавить подчиненную роль");
-            AnsiConsole.WriteLine("3. Показать разрешения роли");
-            AnsiConsole.WriteLine("4. Назначить разрешение");
-            AnsiConsole.WriteLine("5. Отозвать разрешение");
-            AnsiConsole.WriteLine("6. Переместиться в подчиненную роль");
-            AnsiConsole.WriteLine("7. Переместиться в корневую роль");
-            AnsiConsole.WriteLine("0. Выход");
-
-            int choice = AnsiConsole
-                .Prompt(
-                    new TextPrompt<int>("[cyan]Введите ваш выбор:[/]")
-                        .Validate(c => c is >= 0 and <= 7));
+            int choice = AnsiConsole.Prompt(
+                new SelectionPrompt<int>()
+                    .Title("[cyan]Выберите действие для Access Control List (ACL):[/]")
+                    .AddChoices(1, 2, 3, 4, 5, 6, 7, 0)
+                    .UseConverter(x =>
+                    {
+                        return x switch
+                        {
+                            1 => "1. Создать корневую роль",
+                            2 => "2. Добавить подчиненную роль",
+                            3 => "3. Показать разрешения роли",
+                            4 => "4. Назначить разрешение",
+                            5 => "5. Отозвать разрешение",
+                            6 => "6. Переместиться в подчиненную роль",
+                            7 => "7. Переместиться в корневую роль",
+                            0 => "Выход",
+                            _ => x.ToString()
+                        };
+                    })
+                    .PageSize(int.MaxValue));
 
             if (choice == 0) break;
 

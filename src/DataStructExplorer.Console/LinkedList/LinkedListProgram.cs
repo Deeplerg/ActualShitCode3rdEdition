@@ -12,28 +12,33 @@ public class LinkedListProgram
     {
         while (true)
         {
-            AnsiConsole.Markup("[cyan]Выберите операцию для связанного списка:[/]\n");
-            AnsiConsole.WriteLine("1. Перевернуть список");
-            AnsiConsole.WriteLine("2. Переместить последний элемент в начало");
-            AnsiConsole.WriteLine("3. Посчитать уникальные элементы");
-            AnsiConsole.WriteLine("4. Удалить неуникальные элементы");
-            AnsiConsole.WriteLine("5. Вставить список после первого X");
-            AnsiConsole.WriteLine("6. Вставить элемент в отсортированный список");
-            AnsiConsole.WriteLine("7. Удалить все элементы со значением E");
-            AnsiConsole.WriteLine("8. Вставить F перед первым E");
-            AnsiConsole.WriteLine("9. Добавить другой список");
-            AnsiConsole.WriteLine("10. Разделить список по первому вхождению X");
-            AnsiConsole.WriteLine("11. Удвоить список");
-            AnsiConsole.WriteLine("12. Поменять местами два элемента по значению");
-            AnsiConsole.WriteLine("0. Выход");
+            int choice = AnsiConsole.Prompt(
+                new SelectionPrompt<int>()
+                    .Title("[cyan]Выберите операцию для связанного списка:[/]")
+                    .AddChoices(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0)
+                    .UseConverter(x =>
+                    {
+                        return x switch
+                        {
+                            1 => "1. Перевернуть список",
+                            2 => "2. Переместить последний элемент в начало",
+                            3 => "3. Посчитать уникальные элементы",
+                            4 => "4. Удалить неуникальные элементы",
+                            5 => "5. Вставить список после первого X",
+                            6 => "6. Вставить элемент в отсортированный список",
+                            7 => "7. Удалить все элементы со значением E",
+                            8 => "8. Вставить F перед первым E",
+                            9 => "9. Добавить другой список",
+                            10 => "10. Разделить список по первому вхождению X",
+                            11 => "11. Удвоить список",
+                            12 => "12. Поменять местами два элемента по значению",
+                            0 => "Выход",
+                            _ => x.ToString()
+                        };
+                    })
+                    .PageSize(int.MaxValue));
 
-            int choice = AnsiConsole
-                .Prompt(
-                    new TextPrompt<int>("[cyan]Введите ваш выбор:[/]")
-                        .Validate(c => c is >= 0 and <= 12));
-
-            if (choice == 0)
-                break;
+            if (choice == 0) break;
 
             Console.Clear();
             ExecuteChoice(choice);

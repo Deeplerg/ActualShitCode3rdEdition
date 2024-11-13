@@ -13,18 +13,24 @@ public class TodoProgram
     {
         while (true)
         {
-            AnsiConsole.MarkupLine(Environment.NewLine + "[cyan]Выберите действие для списка задач:[/]");
-            AnsiConsole.WriteLine("1. Добавить задачу");
-            AnsiConsole.WriteLine("2. Удалить текущую задачу");
-            AnsiConsole.WriteLine("3. Показать задачи");
-            AnsiConsole.WriteLine("4. Перейти к следующей задаче");
-            AnsiConsole.WriteLine("5. Перейти к предыдущей задаче");
-            AnsiConsole.WriteLine("0. Выйти");
-
-            int choice = AnsiConsole
-                .Prompt(
-                    new TextPrompt<int>("[cyan]Введите ваш выбор:[/]")
-                        .Validate(c => c is >= 0 and <= 5));
+            int choice = AnsiConsole.Prompt(
+                new SelectionPrompt<int>()
+                    .Title("[cyan]Выберите действие для списка задач:[/]")
+                    .AddChoices(1, 2, 3, 4, 5, 0)
+                    .UseConverter(x =>
+                    {
+                        return x switch
+                        {
+                            1 => "1. Добавить задачу",
+                            2 => "2. Удалить текущую задачу",
+                            3 => "3. Показать задачи",
+                            4 => "4. Перейти к следующей задаче",
+                            5 => "5. Перейти к предыдущей задаче",
+                            0 => "Выйти",
+                            _ => x.ToString()
+                        };
+                    })
+                    .PageSize(int.MaxValue));
 
             if (choice == 0) break;
             
@@ -37,21 +43,11 @@ public class TodoProgram
     {
         switch (choice)
         {
-            case 1:
-                AddTask();
-                break;
-            case 2:
-                RemoveCurrentTask();
-                break;
-            case 3:
-                ShowTasks();
-                break;
-            case 4:
-                MoveToNext();
-                break;
-            case 5:
-                MoveToPrevious();
-                break;
+            case 1: AddTask(); break;
+            case 2: RemoveCurrentTask(); break;
+            case 3: ShowTasks(); break;
+            case 4: MoveToNext(); break;
+            case 5: MoveToPrevious(); break;
         }
     }
 

@@ -16,23 +16,29 @@ public class TreeProgram
     {
         while (true)
         {
-            AnsiConsole.Markup("[cyan]Выберите действие для работы с деревом:[/]\n");
-            AnsiConsole.WriteLine("1. Создать дерево из картинки");
-            AnsiConsole.WriteLine("2. Перейти к корневому узлу");
-            AnsiConsole.WriteLine("3. Создать новый корневой узел");
-            AnsiConsole.WriteLine("4. Перейти к левому дочернему узлу");
-            AnsiConsole.WriteLine("5. Перейти к правому дочернему узлу");
-            AnsiConsole.WriteLine("6. Добавить левый дочерний узел");
-            AnsiConsole.WriteLine("7. Добавить правый дочерний узел");
-            AnsiConsole.WriteLine("8. Удалить текущий узел");
-            AnsiConsole.WriteLine("9. Показать обход дерева в глубину");
-            AnsiConsole.WriteLine("10. Показать обход дерева в ширину");
-            AnsiConsole.WriteLine("0. Выйти");
-
-            int choice = AnsiConsole
-                .Prompt(
-                    new TextPrompt<int>("[cyan]Введите ваш выбор:[/]")
-                        .Validate(c => c is >= 0 and <= 10));
+            int choice = AnsiConsole.Prompt(
+                new SelectionPrompt<int>()
+                    .Title("[cyan]Выберите действие для работы с деревом:[/]")
+                    .AddChoices(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0)
+                    .UseConverter(x =>
+                    {
+                        return x switch
+                        {
+                            1 => "1. Создать дерево из картинки",
+                            2 => "2. Перейти к корневому узлу",
+                            3 => "3. Создать новый корневой узел",
+                            4 => "4. Перейти к левому дочернему узлу",
+                            5 => "5. Перейти к правому дочернему узлу",
+                            6 => "6. Добавить левый дочерний узел",
+                            7 => "7. Добавить правый дочерний узел",
+                            8 => "8. Удалить текущий узел",
+                            9 => "9. Показать обход дерева в глубину",
+                            10 => "10. Показать обход дерева в ширину",
+                            0 => "Выйти",
+                            _ => x.ToString()
+                        };
+                    })
+                    .PageSize(int.MaxValue));
 
             if (choice == 0)
                 break;
@@ -87,7 +93,7 @@ public class TreeProgram
 
     private void CreateRootNode()
     {
-        char name = AnsiConsole.Prompt(new TextPrompt<char>("[cyan]Введите название нового корневого узла:[/]"));
+        char name = AnsiConsole.Prompt(new TextPrompt<char>("[cyan]Введите название нового корневого узла (один символ):[/]"));
         
         _navigationStack.Clear();
         _tree.Root = new TreeNode<char>(name);
